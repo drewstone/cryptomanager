@@ -2,12 +2,12 @@
 cryptomanager is a wrapper on top of Ethereum and eventually other cryptocurrencies. The goal is to provide access to cryptocurrency utilities (wallets) and the crytocurrency networks for client and server side applications.
 
 ## Usage
-```
+```javascript
 import Crypto from 'cryptomanager';
 const { Eth } = Crypto;
 ```
 ### Creating a wallet
-```
+```javascript
 Eth.createWallet({
 	 password: /* Enter a password to encrypt wallet locally */ ,
    path: /* Enter a path to store the wallet */,
@@ -19,7 +19,7 @@ Eth.createWallet({
 });
 ```
 ### Connecting to Ethereum
-```
+```javascript
 Eth.connectToEthereum({
 	// Uses keystore & pw for address generation
 	wallet: { ks, pwDerivedKey },
