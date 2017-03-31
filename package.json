@@ -1,8 +1,8 @@
 {
-  "name": "ethereum-manager",
+  "name": "cryptomanager",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "git@github.com:drewstone/ethereum-manager.git",
+  "repository": "git@github.com:drewstone/cryptomanager.git",
   "author": "Drew Stone",
   "license": "UNLICENSED",
   "scripts": {
