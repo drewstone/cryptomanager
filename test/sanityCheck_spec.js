@@ -30,31 +30,25 @@ describe('mocha', () => {
         wallet: { ks, pwDerivedKey },
         url: 'http://localhost:8545',
       })
-      .then((helper) => {
-        assert.ok(helper);
-        return helper.getBalance({ address });
+      .then(({ web3 }) => {
+        assert.ok(web3);
       });
-    })
-    .then((balance) => {
-      assert.ok(typeof balance === 'number');
     });
   });
 
-  it('should get coinbase of Web3 instance', () => {
-    let addr;
+  it('should get the wallet interface', () => {
     return Eth.createWallet(config)
     .then(({ ks, pwDerivedKey, address }) => {
-      addr = address;
       return Eth.connectToEthereum({
         wallet: { ks, pwDerivedKey },
         url: 'http://localhost:8545',
       })
-      .then((helper) => {
-        return helper.getCoinbase();
-      });
-    })
-    .then((address) => {
-      assert.equal(addr, `0x${address}`);
-    });    
-  })
+      .then(({ web3 }) => (Eth.getWalletInterface({ web3 })))
+      .then(({ send, call, transact }) => {
+        assert.ok(send);
+        assert.ok(call);
+        assert.ok(transact);
+      })
+    });
+  });
 });

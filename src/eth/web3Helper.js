@@ -20,13 +20,16 @@ export default function (web3) {
        * @param {String} from:        Ethereum address of sender
        * @param {String} to:          Ethereum address of receiver
        * @param {Number} value:       Amount of Wei to be sent
+       * @param {Object} data:        Data for more complex transactions
        *
        * @return {String}             Transaction hash from Ethereum
        * TODO: Ensure transaction has resolved
        */
-      sendTransaction({ from, to, value }) {
+      sendTransaction({ from, to, value, data }) {
+        // If data is not provided, assume it's an ether token transfer
+        const opts = (data) ? ({ from, to, value, data }) : ({ from, to, value });
         return new Promise((resolve, reject) => {
-          web3.eth.sendTransaction({ from, to, value }, (err, txHash) => {
+          return web3.eth.sendTransaction(opts, (err, txHash) => {
             if (!err) {
               return resolve(txHash);
             }
@@ -59,7 +62,7 @@ export default function (web3) {
        */
       getCoinbase() {
         return new Promise((resolve, reject) => {
-          web3.eth.getCoinbase((err, coinbase) => {
+          return web3.eth.getCoinbase((err, coinbase) => {
             if (!err) {
               return resolve(coinbase.toString());
             }
