@@ -1,0 +1,36 @@
+{
+  "name": "ethereum-manager",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:drewstone/ethereum-manager.git",
+  "author": "Drew Stone",
+  "license": "UNLICENSED",
+  "scripts": {
+    "pretest": "yarn lint",
+    "test": "run-p lint tests-only",
+    "tests-only": "mocha test/**/*spec.js -t 10000",
+    "lint": "eslint ./**/*.{js,jsx}"
+  },
+  "dependencies": {
+    "babel-preset-airbnb": "^2.1.1",
+    "babel-register": "^6.22.0",
+    "bluebird": "^3.4.7",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-plugin-import": "^2.2.0",
+    "eth-lightwallet": "^2.5.3",
+    "web3": "^0.18.2",
+    "web3-provider-engine": "^11.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.2.0",
+    "yarn-run-all": "^3.1.1"
+  }
+}
