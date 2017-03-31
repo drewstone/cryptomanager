@@ -5,6 +5,18 @@ import Web3Helper from './web3Helper';
 import * as Wallet from './wallet';
 import * as StorageHelper from '../storageHelper';
 
+export const createWallet = ({ password, path, name, options = {} }) => {
+  // Generate key data
+  const opts = (options.seedPhrase) ? { password, seedPhrase: options.seedPhrase } : { password };
+  return Wallet.generateKeyInfo(opts)
+  .then(({ ks, pwDerivedKey, mnemonic, address }) => {
+    const data = ks.serialize();
+
+    // Save serialized key data
+    return StorageHelper.save({ path, name, data, options })
+    .then(() => ({ ks, pwDerivedKey, mnemonic, address }));
+  });
+};
 
 export const connectToEthereum = ({ wallet, url }) => {
   if (!wallet) {
@@ -28,18 +40,29 @@ export const connectToEthereum = ({ wallet, url }) => {
   });
 
   const web3 = new Web3(engine);
-  return Web3Helper(web3);
+  return new Promise((resolve, reject) => {
+    web3.net.getListening((err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve({ web3 });
+    });
+  });
 };
 
-export const createWallet = ({ password, path, name, options = {} }) => {
-  // Generate key data
-  const opts = (options.seedPhrase) ? { password, seedPhrase: options.seedPhrase } : { password };
-  return Wallet.generateKeyInfo(opts)
-  .then(({ ks, pwDerivedKey, mnemonic, address }) => {
-    const data = ks.serialize();
-
-    // Save serialized key data
-    return StorageHelper.save({ path, name, data, options })
-    .then(() => ({ ks, pwDerivedKey, mnemonic, address }));
-  });
+export const getWalletInterface = ({ web3 }) => {
+  return Web3Helper({ web3 })
+  .then(({ sendTransaction, sendCall, getBalance, getCoinbase }) => ({
+    send: ({ to, value }) => {
+      return getCoinbase()
+      .then((addr) => (sendTransaction({ from: addr, to, value })));
+    },
+    call: ({ address, functionName, args }) => {
+      return Promise.reject('Unimplemented');
+    },
+    transact: ({ address, functionName, args }) => {
+      return Promise.reject('Unimplemented');
+    },
+  }));
 };
