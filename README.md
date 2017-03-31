@@ -48,5 +48,5 @@ Eth.connectToEthereum({
   - `wallet.pwDerivedKey` {Uint8Array}: Password derived key for authenticating wallet actions ***(required)***
 - `url` {String}: RPC url for Ethereum node ***(default: 'https://mainnet.infura.io/')***
 ### Eth.getWalletInterface({ web3 })
-####-> ***Promise:`({ send, call, transact })`***
+#### -> ***Promise:`({ send, call, transact })`***
 - `web3` {Object}: Connected Web3 instance through `web3-provider-engine` ***(required)***
