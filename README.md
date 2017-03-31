@@ -33,17 +33,20 @@ Eth.connectToEthereum({
 
 # API
 ## Eth
-### Eth.createWallet({ password, path, name, options }) -> ***Promise:`({ ks, pwDerivedKey, mnemonic })`***
+### Eth.createWallet({ password, path, name, options })
+#### -> ***Promise:`({ ks, pwDerivedKey, mnemonic })`***
 - `password` {String}: Temporary password for encrypting keystore while in use ***(required)***
 - `path` {String}: Path to store wallet ***(required)***
 - `name` {String}: Name of wallet/file to store ***(default: 'wallet.json')***
 - `options` {Object}: An object specifying device type (mobile for now) and other extra configuration parameters ***(default: {})***
   - `options.mobile` {Boolean}: Check if using on mobile devices (for `react-native` specifically)
   - `options.seedPhrase` {String}: 12 string mnemonic used to restore existent Ethereum wallet
-### Eth.connectToEthereum({ wallet, url }) -> ***Promise:`({ web3 })`***
+### Eth.connectToEthereum({ wallet, url })
+#### -> ***Promise:`({ web3 })`***
 - `wallet` {Object}: Wallet state ***(required)***
   - `wallet.ks` {Object}: Wallet keystore ***(required)***
   - `wallet.pwDerivedKey` {Uint8Array}: Password derived key for authenticating wallet actions ***(required)***
 - `url` {String}: RPC url for Ethereum node ***(default: 'https://mainnet.infura.io/')***
-### Eth.getWalletInterface({ web3 }) -> ***Promise:`({ send, call, transact })`***
+### Eth.getWalletInterface({ web3 })
+####-> ***Promise:`({ send, call, transact })`***
 - `web3` {Object}: Connected Web3 instance through `web3-provider-engine` ***(required)***
