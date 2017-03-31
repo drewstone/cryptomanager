@@ -1,4 +1,4 @@
-# cryptomanager
+# cryptomanager (previously ethereum-manager)
 cryptomanager is a wrapper on top of Ethereum and eventually other cryptocurrencies. The goal is to provide access to cryptocurrency utilities (wallets) and the crytocurrency networks for client and server side applications.
 
 ## Usage
